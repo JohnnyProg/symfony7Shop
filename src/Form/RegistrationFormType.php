@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -42,6 +43,32 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('firstName', TextType::class,[
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your first name',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Your first name should be at least {{ limit }} characters',
+                        'max' => 100,
+                        'maxMessage' => 'Your first name shouldnt be longer than {{ limit }} characters',
+                    ])
+                ]
+            ])
+            ->add('lastName', TextType::class,[
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your first name',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Your first name should be at least {{ limit }} characters',
+                        'max' => 100,
+                        'maxMessage' => 'Your first name shouldnt be longer than {{ limit }} characters',
+                    ])
+                ]
             ])
         ;
     }

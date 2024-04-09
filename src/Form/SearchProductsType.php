@@ -15,6 +15,7 @@ class SearchProductsType extends AbstractType
     {
         $builder
             ->setMethod('GET')
+
             ->add('sortDirection', ChoiceType::class, [
                 'choices' => [
                     'ascending' => true,

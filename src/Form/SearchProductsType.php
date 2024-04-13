@@ -16,23 +16,17 @@ class SearchProductsType extends AbstractType
         $builder
             ->setMethod('GET')
 
-            ->add('sortDirection', ChoiceType::class, [
+            ->add('sortDir', ChoiceType::class, [
                 'choices' => [
-                    'ascending' => true,
-                    'descending' => false,
+                    'Ascending' => 'ASC',
+                    'Descending' => 'DESC',
                 ]
             ])
             ->add('sortBy', ChoiceType::class, [
                 'choices' => [
-                    'price' => 'price',
-                    'date' => 'date',
+                    'Price' => 'price',
+                    'Sku' => 'sku',
                 ]
-            ])
-            ->add('search', TextType::class,[
-                'required' => false,
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Search',
             ])
             ->getForm()
         ;

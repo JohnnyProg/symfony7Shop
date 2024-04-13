@@ -5,6 +5,34 @@
 {% block body %}
 
 <div class="example-wrapper">
-    {{ form(form) }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn-primary btn" type="submit">Search</button>
+    {{ form_end(form) }}
+</div>
+<div class="md:grid lg:grid-cols-3 gap-14 w-4/5 mx-auto py-15 ">
+    {% for product in products %}
+        <div class="text-center pt-8 pb-4">
+            <img
+                src="/uploads/images/{{ product.image }}"
+                class="aspect-square shadow-xl rounded-md object-cover"
+                />
+            <h2 class="text-gray-700 font-bold text-3xl py-2">
+                {{ product.name }}
+            </h2>
+            <p class="text-base text-gray-700 pt-4 pb-10 leading-8 font-light">
+                {{ product.price }}
+            </p>
+        </div>
+    {% endfor %}
+
+</div>
+<div>
+    {% if previous %}
+        <a href="{{ previous }}">Previous</a>
+    {% endif %}
+    {% if next  %}
+        <a href="{{ next }}">Next</a>
+    {% endif %}
 </div>
 {% endblock %}

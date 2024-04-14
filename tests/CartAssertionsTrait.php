@@ -16,7 +16,7 @@ trait CartAssertionsTrait
         $infoText = self::normalizeWhitespace($infoText);
 
         Assert::assertEquals(
-            'Your cart is empty. Go to the product list',
+            'Your cart is empty. Go to the product list.',
             $infoText,
             'The cart should be empty.'
         );

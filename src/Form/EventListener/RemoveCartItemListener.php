@@ -21,6 +21,7 @@ class RemoveCartItemListener implements EventSubscriberInterface
         if(!$cart instanceof Order) {
             return;
         }
+
         foreach($form->get('items')->all() as $child) {
             if($child->get('remove')->isClicked()) {
                 $cart->removeItem($child->getData());

@@ -10,25 +10,23 @@ use Symfony\Component\Form\FormEvents;
 class ClearCartListener implements EventSubscriberInterface
 {
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
-        return [FormEvents::POST_SET_DATA => 'postSubmit'];
+        return [FormEvents::POST_SUBMIT=> 'postSubmit'];
     }
 
     public function postSubmit(FormEvent $event): void
     {
         $form = $event->getForm();
-        /**
-         * @var Order $cart
-         * */
         $cart = $form->getData();
 
-        if($cart instanceof Order) {
+        if(!$cart instanceof Order) {
             return;
         }
-        if(!$form->get('clear')->isClicked()) {
+        if (!$form->get('clear')->isClicked()) {
             return;
         }
+
         $cart->removeItems();
     }
 }

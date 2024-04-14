@@ -25,7 +25,7 @@
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                             <div class="d-flex justify-content-between align-item-center">
-                                <a href="#" class="btn btn-dark">View details</a>
+                                <a href="{{ path('app_product_show', {id: product.id}) }}" class="btn btn-dark">View details</a>
                                 <span class="h5 mt-auto">{{ product.price }} €</span>
                             </div>
                         </div>

@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Form\EventListener;
+
+use App\Entity\Order;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
+class ClearCartListener implements EventSubscriberInterface
+{
+
+    public static function getSubscribedEvents()
+    {
+        return [FormEvents::POST_SET_DATA => 'postSubmit'];
+    }
+
+    public function postSubmit(FormEvent $event): void
+    {
+        $form = $event->getForm();
+        /**
+         * @var Order $cart
+         * */
+        $cart = $form->getData();
+
+        if($cart instanceof Order) {
+            return;
+        }
+        if(!$form->get('clear')->isClicked()) {
+            return;
+        }
+        $cart->removeItems();
+    }
+}

@@ -20,11 +20,13 @@ class Order
     /**
      * @var Collection<int, OrderItem>
      */
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orderRef', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orderRef', cascade: ["persist", "remove"], orphanRemoval: true)]
     private Collection $items;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private ?string $status = self::STATUS_CART;
+
+    const STATUS_CART = 'cart';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
@@ -52,10 +54,14 @@ class Order
 
     public function addItem(OrderItem $item): static
     {
-        if (!$this->items->contains($item)) {
-            $this->items->add($item);
-            $item->setOrderRef($this);
+        foreach($this->getItems() as $existingItem) {
+            if($existingItem->equals($item)) {
+                $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
+            }
+            return $this;
         }
+        $this->items->add($item);
+        $item->setOrderRef($this);
 
         return $this;
     }
@@ -70,6 +76,25 @@ class Order
         }
 
         return $this;
+    }
+
+    public function removeItems(): self
+    {
+        foreach($this->getItems() as $item){
+            $this->removeItem($item);
+        }
+
+        return $this;
+    }
+
+    public function getTotal(): float
+    {
+        $total = 0;
+
+        foreach($this->getItems() as $item){
+            $total += $item->getTotal();
+        }
+        return $total;
     }
 
     public function getStatus(): ?string

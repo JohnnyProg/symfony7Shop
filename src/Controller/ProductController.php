@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Form\SearchProductsType;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +40,15 @@ class ProductController extends AbstractController
             'products' => $paginator,
             'previous' => ($page - 1 > 0) ? $this->generateUrl('app_product', array_merge($request->query->all(), ['page' => $page - 1])) : null,
             'next' => ($page + 1 > $lastPage) ? null : $this->generateUrl('app_product', array_merge($request->query->all(), ['page' => $page + 1]))
+        ]);
+    }
+
+    #[Route('/product/{id}', name: 'app_product_show')]
+    public function productDetails(Product $product): Response
+    {
+//        $product = $this->productRepository->find($id);
+        return $this->render('product/details.html.twig', [
+            'product' => $product,
         ]);
     }
 }

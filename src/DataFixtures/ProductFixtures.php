@@ -38,9 +38,9 @@ class ProductFixtures extends Fixture
         ];
         $productsImages = [
             '/giorgio-trovato-K62u25Jk6vo-unsplash.jpg',
-            'kiran-ck-LSNJ-pltdu8-unsplash.jpg'
-            ,'c-d-x-PDX_a_82obo-unsplash.jpg'
-            ,'/rachit-tank-2cFZ_FB08UM-unsplash.jpg',
+            '/kiran-ck-LSNJ-pltdu8-unsplash.jpg',
+            '/c-d-x-PDX_a_82obo-unsplash.jpg',
+            '/rachit-tank-2cFZ_FB08UM-unsplash.jpg',
             '/smartphone.jpg',
             '/laptop.jpg',
             '/camera.jpg',
@@ -56,7 +56,7 @@ class ProductFixtures extends Fixture
             '/iron.jpg',
             '/microwave.jpg',
             '/fridge.jpg',
-            'robot.jpg',
+            '/robot.jpg',
             ];
         for ($i = 0; $i < count($skuList); $i++) {
             $product = new Product();

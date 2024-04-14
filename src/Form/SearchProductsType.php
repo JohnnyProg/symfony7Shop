@@ -20,7 +20,8 @@ class SearchProductsType extends AbstractType
                 'choices' => [
                     'Ascending' => 'ASC',
                     'Descending' => 'DESC',
-                ]
+                ],
+                'label' => "Sort direction"
             ])
             ->add('sortBy', ChoiceType::class, [
                 'choices' => [

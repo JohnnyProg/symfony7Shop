@@ -57,8 +57,8 @@ class Order
         foreach($this->getItems() as $existingItem) {
             if($existingItem->equals($item)) {
                 $existingItem->setQuantity($existingItem->getQuantity() + $item->getQuantity());
+                return $this;
             }
-            return $this;
         }
         $this->items->add($item);
         $item->setOrderRef($this);
